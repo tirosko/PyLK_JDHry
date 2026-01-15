@@ -3,20 +3,20 @@ import random
 import sys
 
 pygame.init()  # Init pygame
-W, H = 600, 600  # Screen setup
+W = 600  # Screen setup
+H = 600
 
 screen = pygame.display.set_mode((W, H))
-pygame.display.set_caption("Catch the Falling Blocks")
+pygame.display.set_caption("Pokusna Hra")
 
-WHT, BLU, RED, BLK = (255, 255, 255), (0, 200,
-                                       255), (255, 0, 0), (0, 0, 0)  # Colors
+WHT, BLU, RED, BLK, GRE = (255, 255, 255), (0, 200,255), (255, 0, 0), (0, 0, 0), (0, 180, 0)  # Colors
 
 # Clock and font
 clock = pygame.time.Clock()
 font = pygame.font.SysFont(None, 36)
 
 # Paddle and block
-paddle = pygame.Rect(W // 2 - 60, H - 20, 120, 10)
+paddle = pygame.Rect(W // 2, H - 20, 550, 10)
 block = pygame.Rect(random.randint(0, W - 20), 0, 20, 20)
 b_speed = 5
 
@@ -51,7 +51,7 @@ while run:
 
     # Block missed
     if block.y > H:
-        game_over = font.render(f"Game Over! Final Score: {score}", True, RED)
+        game_over = font.render(f"Koniec Hry Finálne skóre: {score}", True, GRE)
         screen.blit(game_over, (W // 2 - 150, H // 2))
         pygame.display.flip()
         pygame.time.wait(2000)
@@ -62,7 +62,7 @@ while run:
     pygame.draw.rect(screen, BLU, block)
 
     # Display score
-    score_text = font.render(f"Score: {score}", True, WHT)
+    score_text = font.render(f"Skóre: {score}", True, WHT)
     screen.blit(score_text, (10, 10))
 
     pygame.display.flip()
