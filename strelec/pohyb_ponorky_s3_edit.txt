@@ -8,8 +8,7 @@
 # Po stlačení šípky vpravo sa ponorka hýbe vpravo
 
 LOD_RYCH = 10
-Rychlost je predbezna
-ahoj
+
 
 def hyb_lod(udalost):
     if udalost.keysym == "Up":
