@@ -1,0 +1,47 @@
+{
+  // ===== Readability for Demonstrations =====
+  "editor.fontSize": 18,
+  "editor.lineHeight": 1.7,
+  "editor.wordWrap": "on",
+  "editor.minimap.enabled": false,
+  "editor.cursorBlinking": "solid",
+  "editor.smoothScrolling": true,
+
+  // ===== Predictable Editing (no surprises) =====
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.formatOnSave": false,
+  "editor.formatOnPaste": false,
+  "editor.quickSuggestions": false,
+  "editor.parameterHints.enabled": false,
+
+  // ===== Visual Guidance =====
+  "editor.guides.indentation": true,
+  "editor.guides.bracketPairs": true,
+  "editor.bracketPairColorization.enabled": true,
+  "editor.renderWhitespace": "boundary",
+
+  // ===== Calm Workspace =====
+  "workbench.startupEditor": "none",
+  "workbench.colorTheme": "Default Light Modern",
+  "workbench.iconTheme": "vs-seti",
+  "breadcrumbs.enabled": true,
+  "workbench.editor.enablePreview": false,
+
+  // ===== File Handling =====
+  "files.autoSave": "off",
+  "files.trimTrailingWhitespace": false,
+  "explorer.confirmDelete": true,
+  "explorer.compactFolders": false,
+
+  // ===== Terminal =====
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "terminal.integrated.enableBell": false,
+
+  // ===== Extensions =====
+  "extensions.autoUpdate": true,
+  "extensions.autoCheckUpdates": true,
+
+  // ===== Privacy =====
+  "telemetry.telemetryLevel": "off"
+}

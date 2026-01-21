@@ -1,0 +1,40 @@
+{
+  // ===== Easy Reading =====
+  "editor.fontSize": 16,
+  "editor.lineHeight": 1.6,
+  "editor.wordWrap": "on",
+  "editor.minimap.enabled": false,
+  "editor.cursorBlinking": "solid",
+
+  // ===== Simple Editing =====
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.smoothScrolling": true,
+  "editor.renderWhitespace": "none",
+  "editor.formatOnSave": false,
+  "editor.formatOnPaste": false,
+
+  // ===== Calm & Predictable =====
+  "files.autoSave": "off",
+  "files.trimTrailingWhitespace": false,
+  "explorer.confirmDelete": true,
+  "explorer.compactFolders": false,
+
+  // ===== Clean Interface =====
+  "workbench.startupEditor": "none",
+  "workbench.colorTheme": "Default Light Modern",
+  "workbench.iconTheme": "vs-seti",
+  "workbench.statusBar.visible": true,
+  "breadcrumbs.enabled": false,
+
+  // ===== Terminal =====
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "terminal.integrated.enableBell": false,
+
+  // ===== Extensions =====
+  "extensions.autoUpdate": true,
+  "extensions.autoCheckUpdates": true,
+
+  // ===== Privacy =====
+  "telemetry.telemetryLevel": "off"
+}
