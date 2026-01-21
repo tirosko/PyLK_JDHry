@@ -1,0 +1,32 @@
+# Ponorka pôjde pri stlačení klávesov takto ďaleko
+
+# Ak sa stlačí šípka nahor, obe časti ponorky stúpajú
+# Tieto riadky sa aktivujú, ak sa stlačí šípka nadol - ponorka klesá.
+
+# Ponorka sa po stlačení šípky vľavo hýbe vľavo
+
+# Po stlačení šípky vpravo sa ponorka hýbe vpravo
+
+LOD_RYCH = 10
+
+
+def hyb_lod(udalost):
+    if udalost.keysym == "Up":
+        c.move(lod_id, 0, -LOD_RYCH)
+        c.move(lod_id2, 0, -LOD_RYCH)
+    elif udalost.keysym == "Down":
+        c.move(lod_id, 0, LOD_RYCH)
+        c.move(lod_id2, 0, LOD_RYCH)
+    elif udalost.keysym == "Left":
+        c.move(lod_id, -LOD_RYCH, 0)
+        c.move(lod_id2, -LOD_RYCH, 0)
+    elif udalost. keysym == "Right":
+        c.move(lod_id, LOD_RYCH, 0)
+        c.move(lod_id2, LOD_RYCH, 0)
+
+c.bind_all("<Key>", hyb_lod)
+
+
+# Prikáže Pythonu, aby spustil „hyb_lod“, keď sa stlačí akýkoľvek kláves
+
+# Súradnica y sa zmen šuje smerom nahor
