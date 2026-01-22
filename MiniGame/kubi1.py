@@ -1,1 +1,0 @@
-print("Yes, Master Kubi is here!")
