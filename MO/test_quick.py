@@ -2,7 +2,7 @@
 import sys
 sys.path.insert(0, r'c:\Users\tibor\Documents\ProgramovanieHPZBG9\PyLK_JDHry\MO')
 
-from kocky_zafarby_copy_test import KockaVisualizer  # Replace with actual module name if different
+from kocky_zafarby_copy_test import KockaVisualizer # type: ignore
 
 # Test vytvorenia visualizeru
 kocka = ('R', 'G', 'B', 'N', 'N', 'N')
