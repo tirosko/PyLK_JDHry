@@ -93,7 +93,7 @@ class KockaVisualizer:
         x2d = int(sirka/2 + (x / vzdalenost) * scale)
         y2d = int(vyska/2 - (y / vzdalenost) * scale)
         
-        return [x2d, y2d, z]
+        return (x2d, y2d, z)  # Vrátime z pre zoradenie
     
     def nakresli_ascii(self):
         """Jednoduchá ASCII reprezentácia kocky."""
@@ -135,10 +135,12 @@ class KockaVisualizer:
             self.rot_y += 0.007
             
             # Transformácia a projekcia vrcholov
+            vrcholy_3d = []
             vrcholy_2d = []
             for vrchol in self.VRCHOLY:
                 rot = self.rotuj_bod(vrchol, self.rot_x, self.rot_y, self.rot_z)
                 proj = self.projekt_3d_na_2d(rot, sirka, vyska)
+                vrcholy_3d.append(rot)
                 vrcholy_2d.append(proj)
             
             # Maľovanie
@@ -147,7 +149,7 @@ class KockaVisualizer:
             # Zoraďovanie stien podľa z-koordináty (painter's algorithm)
             steny_sorted = []
             for idx, sten in enumerate(self.STENY):
-                z_avg = sum(vrcholy_2d[v][2] for v in sten) / len(sten)
+                z_avg = sum(vrcholy_3d[v][2] for v in sten) / len(sten)
                 steny_sorted.append((z_avg, idx, sten))
             
             steny_sorted.sort()
@@ -156,8 +158,14 @@ class KockaVisualizer:
             for z_avg, idx, sten in steny_sorted:
                 farba = self.FARBY_RGB[self.stav_kocky[idx]]
                 body = [tuple(vrcholy_2d[v][:2]) for v in sten]
-                pygame.draw.polygon(screen, farba, body)
-                pygame.draw.polygon(screen, (0, 0, 0), body, 3)
+                
+                # Skontrolujeme, či máme aspoň 3 body pre kreslenie polygónu
+                if len(body) >= 3:
+                    try:
+                        pygame.draw.polygon(screen, farba, body)
+                        pygame.draw.polygon(screen, (0, 0, 0), body, 3)
+                    except Exception as e:
+                        print(f"Chyba pri kreslení: {e}")
             
             # Text informácie
             text1 = font.render(f"Kocka: {self.stav_kocky}", True, (255, 255, 255))
@@ -185,7 +193,7 @@ class KockaVisualizer:
 class Kocka:
     """Reprezentácia zafarbenej kocky."""
     
-    # Indexy stien: 0=vrch, 1=spodok, 2=predok, 3=zámer, 4=vľavo, 5=vpravo
+    # Indexy stien: 0=vrch, 1=spodok, 2=predok, 3=záver, 4=vľavo, 5=vpravo
     # Všetky 24 rotácií kocky (permutácie stien)
     ROTACIE = [
         # Identita a otáčanie okolo osi Z (vrch-spodok)
