@@ -3,16 +3,18 @@
 
 # nameList = ['Harsh', 'Pratik', 'Bob', 'Dhruv']
 # # Indexing a list using index() method
-# # pos = nameList.index("GeeksforGeeks")
-# pos1 = nameList.index("Pratik")
+# # pos1 = nameList.index("GeeksforGeeks")
+# pos1 = nameList.index("Harsh")
 # print (pos1)
 
 # Kviz 4
 # li = [1, 3, 5, 7, 9]
 # # print(li.pop(-3), end = ' ')
 # # Pop remove a specific element from the list using index
-# print(li.pop(-3))
-# print(li)
+# a=li
+# print(a)
+# print(a.pop(2))
+# print(a)
 
 # Vysvetliť kód a jeho výstup. Copy zoznamu `a` obsahuje pôvodný zoznam `[1, 2, 3, 4]`.
 # Keď priradíme `b = a`, `b` sa stáva referenciou na ten istý zoznam, takže zmeny v `a` sa prejavia aj v `b`.
@@ -23,6 +25,7 @@
 # a = [1, 2, 3, 4]
 # b = a
 # c = a.copy()
+# print(a.pop(2))
 # d = a
 # a[0] = [5]
 # print(a, b, c, d)
@@ -30,6 +33,7 @@
 # Kvíz 6
 # li = [1, 1.33, 'GFG', 0, 'NO', None, 'G', True]
 # val1, val2 = 0,''
+# print(type(li[6]))
 # for x in li:
 # 	if(type(x) == int or type(x) == float):
 # 		val1 += x
@@ -66,5 +70,6 @@
 # Kvíz 8
 # a = [x for x in (x for x in 'Geeks 22966 for Geeks' if x.isdigit()) if (x in ([x for x in range(20)]))]
 # print(a)
+
 
 # Pokračovanie kvízu 8
