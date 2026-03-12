@@ -15,11 +15,9 @@ WHT, BLU, RED, BLK, GRE = (255, 255, 255), (0, 200,255), (255, 0, 0), (0, 0, 0),
 clock = pygame.time.Clock()
 font = pygame.font.SysFont(None, 36)
 
-# Paddle and ball
+# Paddle and block
 paddle = pygame.Rect(W // 2, H - 20, 100, 10)
-ball_radius = 20
-ball_x = random.randint(ball_radius, W - ball_radius)
-ball_y = 0
+block = pygame.Rect(random.randint(0, W - 20), 0, 20, 20)
 b_speed = 5
 
 score = 0  # Score
@@ -41,21 +39,18 @@ while run:
     if keys[pygame.K_RIGHT] and paddle.right < W:
         paddle.move_ip(8, 0)
 
-    # Move ball
-    ball_y += b_speed
+    # Move block
+    block.y += b_speed
 
-    # ball bounding rect for collision
-    ball_rect = pygame.Rect(int(ball_x - ball_radius), int(ball_y - ball_radius), ball_radius * 2, ball_radius * 2)
-
-    # Ball caught
-    if ball_rect.colliderect(paddle):
-        ball_y = 0
-        ball_x = random.randint(ball_radius, W - ball_radius)
+    # Block caught
+    if block.colliderect(paddle):
+        block.y = 0
+        block.x = random.randint(0, W - 20)
         score += 1
         b_speed += 0.5  # Speed up
 
-    # Ball missed
-    if ball_y - ball_radius > H:
+    # Block missed
+    if block.y > H:
         game_over = font.render(f"Koniec Hry Finálne skóre: {score}", True, GRE)
         screen.blit(game_over, (W // 2 - 150, H // 2))
         pygame.display.flip()
@@ -64,7 +59,7 @@ while run:
 
     # Draw objects
     pygame.draw.rect(screen, WHT, paddle)
-    pygame.draw.circle(screen, RED, (int(ball_x), int(ball_y)), ball_radius)
+    pygame.draw.rect(screen, BLU, block)
 
     # Display score
     score_text = font.render(f"Skóre: {score}", True, WHT)
