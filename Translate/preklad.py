@@ -15,3 +15,12 @@ def prelozit(target="sk"):
 
 
 prelozit()
+
+
+def prelozit_do_anglictiny():
+    text = input("Zadejte text k přeložení do angličtiny: ")
+    preklad = GoogleTranslator(source="auto", target="en").translate(text)
+    print(f"Překlad: {preklad}")
+
+
+prelozit_do_anglictiny()
