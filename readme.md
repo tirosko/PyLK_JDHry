@@ -2,6 +2,7 @@
 
 Je to zmes informácii pre pracovné potreby
 ## Python základy
-Hry Python 
-Excel 365
+Hry Python  
+Excel 365  
+
 
