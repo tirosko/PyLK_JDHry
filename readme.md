@@ -1,8 +1,12 @@
 # Pracovne prostredie vývoj hier a myšlienky IT
 
-Je to zmes informácii pre pracovné potreby
-## Python základy
-Hry Python  
-Excel 365  
+***Zmes informácii pre pracovné potreby***
+
+##### Python základy
+
+1. Hry Python  
+2. [Excel 365](https://m365.cloud.microsoft/)
+
+
 
 
