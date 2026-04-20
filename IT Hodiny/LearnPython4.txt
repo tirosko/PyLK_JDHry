@@ -1,0 +1,13 @@
+https://github.com/PacktPublishing/Learn-Python-Programming-Fourth-Edition
+
+preísť niektoré príklady
+
+http://programarcadegames.com/index.php?chapter=example_code
+
+http://programarcadegames.com/index.php?chapter=introduction_to_graphics&lang=en#section_5
+
+http://programarcadegames.com/index.php?chapter=introduction_to_animation#section_8
+https://www.youtube.com/watch?v=-GmKoaX2iMs
+
+Ako sa vyvíjal Python: - https://www.youtube.com/watch?v=GfH4QL4VqJ0 
+
