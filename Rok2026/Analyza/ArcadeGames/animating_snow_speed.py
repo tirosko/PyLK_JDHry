@@ -12,6 +12,7 @@
 import pygame
 import random
  
+
 # Initialize the game engine
 pygame.init()
  
@@ -31,7 +32,8 @@ snow_list = []
 for i in range(50):
     x = random.randrange(0, 400)
     y = random.randrange(0, 400)
-    snow_list.append([x, y])
+    s=random.randrange(1, 4)
+    snow_list.append([x, y, s])
  
 clock = pygame.time.Clock()
  
@@ -50,10 +52,10 @@ while not done:
     for i in range(len(snow_list)):
  
         # Draw the snow flake
-        pygame.draw.circle(screen, WHITE, snow_list[i], 2)
+        pygame.draw.circle(screen, WHITE, [snow_list[i][0], snow_list[i][1]], 2)
  
         # Move the snow flake down one pixel
-        snow_list[i][1] += 5
+        snow_list[i][1] += snow_list[i][2]
  
         # If the snow flake has moved off the bottom of the screen
         if snow_list[i][1] > 400:
