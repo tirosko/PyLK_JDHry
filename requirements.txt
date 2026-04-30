@@ -1,3 +1,11 @@
-pygame==2.6.1
-Pillow
-deep_translator
+beautifulsoup4==4.14.3
+certifi==2026.2.25
+charset-normalizer==3.4.7
+deep-translator==1.11.4
+idna==3.11
+pillow==12.2.0
+pygame-ce==2.5.7
+requests==2.33.1
+soupsieve==2.8.3
+typing_extensions==4.15.0
+urllib3==2.6.3
