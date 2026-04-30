@@ -65,7 +65,8 @@ while not done:
     # Draw rectangles up to current animation index
     for i in range(current_index + 1):
         rect = rectangles_to_draw[i]
-        pygame.draw.rect(screen, BLACK, rect, 1)
+        pygame.time.delay(50)  # Pause for animation effect
+        pygame.draw.rect(screen, RED, rect, 1)
 
     # Animate: advance to next rectangle every few frames
     if current_index < len(rectangles_to_draw) - 1:
