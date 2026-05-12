@@ -28,8 +28,8 @@ rect_x = 50
 rect_y = 50
 
 # Speed and direction of rectangle
-rect_change_x =2
-rect_change_y =2
+rect_change_x =1
+rect_change_y =1
 
 size = [x_size, y_size]
 screen = pygame.display.set_mode(size)
@@ -50,9 +50,7 @@ while not done:
         if event.type == pygame.QUIT:
             done = True
 
-    if abs(rect_change_x) > 20:
-        done = True
-    if abs(rect_change_y) > 20:
+    if abs(rect_change_x) > 10:
         done = True
 
     # --- Logic
