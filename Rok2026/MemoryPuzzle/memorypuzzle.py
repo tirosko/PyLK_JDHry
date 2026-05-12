@@ -1,15 +1,14 @@
 # Memory Puzzle, by Al Sweigart al@inventwithpython.com
 # (Pygame) A simple memory matching game.
 
-
 import random
 import pygame
 import sys
-from pygame.locals import *
+from pygame.locals import QUIT, KEYUP, K_ESCAPE, MOUSEMOTION, MOUSEBUTTONUP
 
 FPS = 60  # frames per second, the general speed of the program
-WINDOWWIDTH = 1280  # size of window's width in pixels
-WINDOWHEIGHT = 960  # size of windows' height in pixels
+WINDOWWIDTH = 640  # size of window's width in pixels
+WINDOWHEIGHT = 480  # size of windows' height in pixels
 REVEALSPEED = 8  # speed boxes' sliding reveals and covers
 BOXSIZE = 40  # size of box height & width in pixels
 GAPSIZE = 10  # size of gap between boxes in pixels
@@ -83,14 +82,14 @@ def main():
                 mouseClicked = True
 
         boxx, boxy = getBoxAtPixel(mousex, mousey)
-        if boxx != None and boxy != None:
+        if boxx is not None and boxy is not None:
             # The mouse is currently over a box.
             if not revealedBoxes[boxx][boxy]:
                 drawHighlightBox(boxx, boxy)
             if not revealedBoxes[boxx][boxy] and mouseClicked:
                 revealBoxesAnimation(mainBoard, [(boxx, boxy)])
                 revealedBoxes[boxx][boxy] = True  # set the box as "revealed"
-                if firstSelection == None:  # the current box was the first box clicked
+                if firstSelection is None:  # the current box was the first box clicked
                     firstSelection = (boxx, boxy)
                 else:  # the current box was the second box clicked
                     # Check if there is a match between the two icons.

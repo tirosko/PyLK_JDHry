@@ -1,5 +1,7 @@
-import random, pygame, sys
-from pygame.locals import *
+import random
+import pygame
+import sys
+from pygame.locals import QUIT, KEYUP, K_ESCAPE, MOUSEMOTION, MOUSEBUTTONUP
 def hhh():
     global a, b
     pygame.init()
@@ -27,13 +29,13 @@ def hhh():
                 j, k = eee.pos
                 e = True
         bb, ee = m(j, k)
-        if bb != None and ee != None:
+        if bb is not None and ee is not None:
             if not hh[bb][ee]:
                 n(bb, ee)
             if not hh[bb][ee] and e:
                 o(i, [(bb, ee)])
                 hh[bb][ee] = True
-                if h == None:
+                if h is None:
                     h = (bb, ee)
                 else:
                     q, fff = s(i, h[0], h[1])

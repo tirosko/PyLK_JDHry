@@ -1,18 +1,15 @@
-Bohužiaľ, nemám dostupný nástroj na priame vytvorenie súborov. Ponúkam vám obsah Markdown dokumentu, ktorý si môžete skopírovať:
-
-```markdown
 # Analýza programu Memory Puzzle
 
 ## 1. Úvod do programu
-Memory Puzzle je hra postavená na knižnici Pygame, kde hráč musí nájsť páry identických ikon (rovnaký tvar a farba).
 
----
+Memory Puzzle je hra postavená na knižnici Pygame, kde hráč musí nájsť páry identických ikon (rovnaký tvar a farba).
 
 ## 2. Konfigurácia hry (Globálne Konštanty)
 
 ### Výkon a Okno
+
 - **FPS = 60**: Počet snímok za sekundu (rýchlosť behu)
-- **WINDOWWIDTH = 1280, WINDOWHEIGHT = 960**: Rozlíšenie okna
+- **WINDOWWIDTH = 640, WINDOWHEIGHT = 480**: Rozlíšenie okna
 - **BOXSIZE = 40**: Veľkosť jedného políčka (40×40 px)
 - **GAPSIZE = 10**: Medzera medzi políčkami
 - **BOARDWIDTH = 10, BOARDHEIGHT = 7**: Rozmer dosky = 70 políčok (35 párov)
@@ -20,17 +17,18 @@ Memory Puzzle je hra postavená na knižnici Pygame, kde hráč musí nájsť p�
 - **XMARGIN, YMARGIN**: Odsadenie dosky od okrajov okna
 
 ### Farby a Tvary
-- **7 dostupných farieb**: Červená, zelená, modrá, žltá, oranžová, fialová, azúrová
-- **5 dostupných tvarov**: Donut, štvorec, diamant, čiary, ovál
-- **Spolu 35 unikátnych kombinácií** (viac ako potrebných 35 párov)
 
----
+**7 dostupných farieb**: Červená, zelená, modrá, žltá, oranžová, fialová, azúrová
+**5 dostupných tvarov**: Donut, štvorec, diamant, čiary, ovál
+
+- **Spolu 35 unikátnych kombinácií** (viac ako potrebných 35 párov)
 
 ## 3. Hlavná funkcia - Game Loop (`main()`)
 
 Jadro hry, ktoré sa neustále opakuje:
 
-### Fázy:
+### Fázy
+
 1. **Inicializácia Pygame** - vytvorenie okna a hernej dosky
 2. **Herný cyklus** (`while True`):
    - Vyčistenie a prekreslenie obrazovky
@@ -38,7 +36,6 @@ Jadro hry, ktoré sa neustále opakuje:
      - Kľúč ESC = zatvorenie hry
      - Pohyb myši = sledovanie pozície
      - Kliknutie = výber políčka
-   
    - **Logika hry**:
      - Prvé kliknutie na zatvorené políčko → otvorenie + uloženie pozície
      - Druhé kliknutie → porovnanie s prvým
@@ -51,11 +48,13 @@ Jadro hry, ktoré sa neustále opakuje:
 ## 4. Generovanie hernej dosky
 
 ### `generateRevealedBoxesData(val)`
+
 - Vytvorí 2D pole `revealedBoxes[10][7]`
 - Všetky políčka inicializované na rovnakú hodnotu (True = otvorené, False = zatvorené)
 - Sleduje stav jednotlivých políčok počas hry
 
 ### `getRandomizedBoard()`
+
 - Vytvorí všetky možné kombinácie farieb a tvarov
 - Z dostupných kombinácií vyber 35 unikátnych párov
 - Každú kombináciu zduplikuje (aby existoval pár)
@@ -67,10 +66,12 @@ Jadro hry, ktoré sa neustále opakuje:
 ## 5. Konverzia súradníc
 
 ### `leftTopCoordsOfBox(boxx, boxy)`
+
 - Premení súradnice dosky (0-9, 0-6) na **pixelové súradnice** na obrazovke
 - Zohľadňuje XMARGIN, YMARGIN, BOXSIZE a GAPSIZE
 
 ### `getBoxAtPixel(x, y)`
+
 - **Opačný proces**: Zistí, na ktoré políčko dosky hráč klikol
 - Prejde všetky políčka (10×7) a skontroluje, či sa myš nachádza v ich oblasti
 - Vráti (boxx, boxy) alebo (None, None)
@@ -80,7 +81,9 @@ Jadro hry, ktoré sa neustále opakuje:
 ## 6. Vykresľovanie grafiky
 
 ### `drawIcon(shape, color, boxx, boxy)`
+
 Nakreslí ikonu podľa tvaru a farby:
+
 - **DONUT**: Dva kruhy (vonkajší + vnútorný)
 - **SQUARE**: Štvorec
 - **DIAMOND**: Diamant (4-uholník)
@@ -88,17 +91,20 @@ Nakreslí ikonu podľa tvaru a farby:
 - **OVAL**: Oválny tvar
 
 ### `drawBoxCovers(board, boxes, coverage)`
+
 - Nakreslí políčka s pokrytím (pre animácie)
 - `coverage`: Počet pixelov pokrytia (0 = otvorené, BOXSIZE = zatvorené)
 - Aktualizuje obrazovku a spustí FPS hodiny
 
 ### `drawBoard(board, revealed)`
+
 - Nakreslí **celú dosku**
 - Pre každé políčko:
   - Zatvorené (`revealed[x][y] = False`) → Biele políčko
   - Otvorené (`revealed[x][y] = True`) → Nakreslí ikonu
 
 ### `drawHighlightBox(boxx, boxy)`
+
 - Nakreslí **modrý okvás** okolo políčka pod myšou
 - Vizuálna spätná väzba pre hráča
 
@@ -107,20 +113,24 @@ Nakreslí ikonu podľa tvaru a farby:
 ## 7. Animácie
 
 ### `revealBoxesAnimation(board, boxesToReveal)`
+
 - Animácia **otváraní políčka**
 - Postupne zmenšuje pokrytie z BOXSIZE na 0 (v krokoch po REVEALSPEED)
 - Vytvorí efekt "skĺzavajúcej" vrstvy
 
 ### `coverBoxesAnimation(board, boxesToCover)`
+
 - Opačný efekt - animácia **zatvárania**
 - Postupne zväčšuje pokrytie z 0 na BOXSIZE
 
 ### `startGameAnimation(board)`
+
 - **Úvodná animácia** - postupne otvorí a zatvára všetky políčka
 - Rozdelí 70 políčok na skupiny po 8 a animuje ich po poriadku
 - Vytvorí vizuálny efekt "prehliadky" dosky
 
 ### `gameWonAnimation(board)`
+
 - **Blikajúca animácia** pri víťazstve
 - Pozadie bliká medzi LIGHTBGCOLOR a BGCOLOR 13-krát
 - Čakanie 300ms medzi každou zmenou
@@ -129,17 +139,15 @@ Nakreslí ikonu podľa tvaru a farby:
 
 ## 8. Pomocné funkcie
 
-| Funkcia | Účel |
+|Funkcia|Účel|
 |---------|------|
-| `splitIntoGroupsOf(groupSize, list)` | Rozdelí zoznam na menšie skupiny (používa sa v `startGameAnimation`) |
-| `getShapeAndColor(board, x, y)` | Vráti (tvar, farba) ikony na pozícii |
-| `hasWon(revealedBoxes)` | Skontroluje, či sú **všetky** políčka otvorené (príspevá na víťazstvo) |
+|`splitIntoGroupsOf(groupSize, list)`|Rozdelí zoznam na menšie skupiny (používa sa v `startGameAnimation`)|
+|`getShapeAndColor(board, x, y)`|Vráti (tvar, farba) ikony na pozícii|
+|`hasWon(revealedBoxes)`|Skontroluje, či sú **všetky** políčka otvorené (príspevá na víťazstvo)|
 
 ---
 
 ## 9. Tok hry - Detailný popis
-
-```
 ┌─────────────────────────────────────┐
 │   SPUSTENIE PROGRAMU                │
 └──────────────┬──────────────────────┘
@@ -212,6 +220,7 @@ Nakreslí ikonu podľa tvaru a farby:
                │
                ▼
          (CYKLUS SA OPAKUJE)
+
 ```
 
 ---
@@ -219,15 +228,18 @@ Nakreslí ikonu podľa tvaru a farby:
 ## 10. Klíčové koncepty
 
 ### Dátové štruktúry
+
 - **mainBoard**: 2D pole [10][7] obsahujúce (tvar, farba) pre každé políčko
 - **revealedBoxes**: 2D pole [10][7] s hodnotami True (otvorené) / False (zatvorené)
 - **icons**: Zoznam všetkých dostupných kombinácií (tvar, farba)
 
 ### Stav hry
+
 - **firstSelection**: Uložená pozícia prvého kliknutého políčka
 - Slúži na porovnanie s druhým kliknutím
 
 ### Ľudský zážitok
+
 - **Highlight** pri pohybe myši → pozná hráč, na čo sa chystá kliknúť
 - **Animácie** otváraní/zatvárania → vizuálne spätná väzba
 - **Čakanie 1s** pri nezhode → hráč stihne memorovať pozície
@@ -238,6 +250,7 @@ Nakreslí ikonu podľa tvaru a farby:
 ## Záver
 
 Memory Puzzle je elegantný príklad hry s jednoduchými pravidlami:
+
 - **Cieľ**: Nájsť všetky páry
 - **Mechanika**: Klikaj, pamätaj si, porovnávaj
 - **Komplexnosť**: Vytvára sa vizuálny zážitok cez animácie a spracovanie udalostí
@@ -251,6 +264,7 @@ Program demonštruje kľúčové koncepty objektovo orientovaného programovania
 ```
 
 Teraz si môžete:
+
 1. Skopírovať obsah vyššie
 2. V aktuálnej zložke (MemoryPuzzle) vytvorić nový súbor `analyzaAI.md`
 3. Vložiť tam obsah
