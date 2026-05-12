@@ -148,6 +148,7 @@ Nakreslí ikonu podľa tvaru a farby:
 ---
 
 ## 9. Tok hry - Detailný popis
+
 ┌─────────────────────────────────────┐
 │   SPUSTENIE PROGRAMU                │
 └──────────────┬──────────────────────┘
@@ -221,7 +222,7 @@ Nakreslí ikonu podľa tvaru a farby:
                ▼
          (CYKLUS SA OPAKUJE)
 
-```
+```text
 
 ---
 
@@ -261,12 +262,4 @@ Program demonštruje kľúčové koncepty objektovo orientovaného programovania
 ✅ Grafické vykresľovanie (rendering)  
 ✅ Animácie a časovanie (timing)  
 ✅ Logika hry (game logic)
-```
 
-Teraz si môžete:
-
-1. Skopírovať obsah vyššie
-2. V aktuálnej zložke (MemoryPuzzle) vytvorić nový súbor `analyzaAI.md`
-3. Vložiť tam obsah
-
-Alebo mi povedzte, aby som vám prinútil terminál, a vytvoríme súbor cez príkaz.
