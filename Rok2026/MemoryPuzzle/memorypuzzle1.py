@@ -18,20 +18,22 @@ BOXSIZE = 40  # size of box height & width in pixels - veľkosť box v pixeloch
 GAPSIZE = 10  # size of gap between boxes in pixels
 BOARDWIDTH = 10  # number of columns of icons
 BOARDHEIGHT = 7  # number of rows of icons
-assert (BOARDWIDTH * BOARDHEIGHT) % 2 == 0, 'Board needs to have an even number of boxes for pairs of matches.'
+assert (BOARDWIDTH * BOARDHEIGHT) % 2 == 0, (
+    "Board needs to have an even number of boxes for pairs of matches."
+)
 XMARGIN = int((WINDOWWIDTH - (BOARDWIDTH * (BOXSIZE + GAPSIZE))) / 2)
 YMARGIN = int((WINDOWHEIGHT - (BOARDHEIGHT * (BOXSIZE + GAPSIZE))) / 2)
 
 #            R    G    B
 GRAY = (100, 100, 100)
-NAVYBLUE = (60,  60, 100)
+NAVYBLUE = (60, 60, 100)
 WHITE = (255, 255, 255)
-RED = (255,   0,   0)
-GREEN = (0, 255,   0)
-BLUE = (0,   0, 255)
-YELLOW = (255, 255,   0)
-ORANGE = (255, 128,   0)
-PURPLE = (255,   0, 255)
+RED = (255, 0, 0)
+GREEN = (0, 255, 0)
+BLUE = (0, 0, 255)
+YELLOW = (255, 255, 0)
+ORANGE = (255, 128, 0)
+PURPLE = (255, 0, 255)
 CYAN = (0, 255, 255)
 
 BGCOLOR = NAVYBLUE
@@ -39,18 +41,20 @@ LIGHTBGCOLOR = GRAY
 BOXCOLOR = WHITE
 HIGHLIGHTCOLOR = BLUE
 
-DONUT = 'donut'
-SQUARE = 'square'
-DIAMOND = 'diamond'
-LINES = 'lines'
-OVAL = 'oval'
+DONUT = "donut"
+SQUARE = "square"
+DIAMOND = "diamond"
+LINES = "lines"
+OVAL = "oval"
 
 ALLCOLORS = (RED, GREEN, BLUE, YELLOW, ORANGE, PURPLE, CYAN)
 ALLSHAPES = (DONUT, SQUARE, DIAMOND, LINES, OVAL)
 # 70 >= 70 - väčší počet ikon než je potřeba pro velikost desky, takže hra bude fungovat i když se přidají další tvary nebo barvy
 # 70 = 7 barev * 5 tvarů * 2 (protože každý tvar a barva musí být ve dvojici)
 # pre väčšiu desku je potřeba více ikon, takže se musí přidat další barvy nebo tvary
-assert len(ALLCOLORS) * len(ALLSHAPES) * 2 >= BOARDWIDTH * BOARDHEIGHT, "Board is too big for the number of shapes/colors defined."
+assert len(ALLCOLORS) * len(ALLSHAPES) * 2 >= BOARDWIDTH * BOARDHEIGHT, (
+    "Board is too big for the number of shapes/colors defined."
+)
 
 
 def main():
@@ -61,15 +65,15 @@ def main():
 
     mousex = 0  # used to store x coordinate of mouse event
     mousey = 0  # used to store y coordinate of mouse event
-    pygame.display.set_caption('Memory Game')
+    pygame.display.set_caption("Memory Game")
 
     mainBoard = getRandomizedBoard()
     revealedBoxes = generateRevealedBoxesData(False)
 
-    firstSelection = None  # stores the (x, y) of the first box clicked.
+    # firstSelection = None  # stores the (x, y) of the first box clicked.
 
-    DISPLAYSURF.fill(BGCOLOR)
-    startGameAnimation(mainBoard)
+    # DISPLAYSURF.fill(BGCOLOR)
+    # startGameAnimation(mainBoard)
 
     while True:  # main game loop
         mouseClicked = False
@@ -88,46 +92,46 @@ def main():
                 mouseClicked = True
 
         boxx, boxy = getBoxAtPixel(mousex, mousey)
-        if boxx is not None and boxy is not None:
-            # The mouse is currently over a box.
-            if not revealedBoxes[boxx][boxy]:
-                drawHighlightBox(boxx, boxy)
-            if not revealedBoxes[boxx][boxy] and mouseClicked:
-                revealBoxesAnimation(mainBoard, [(boxx, boxy)])
-                revealedBoxes[boxx][boxy] = True  # set the box as "revealed"
-                if firstSelection is None:  # the current box was the first box clicked
-                    firstSelection = (boxx, boxy)
-                else:  # the current box was the second box clicked
-                    # Check if there is a match between the two icons.
-                    icon1shape, icon1color = getShapeAndColor(
-                        mainBoard, firstSelection[0], firstSelection[1])
-                    icon2shape, icon2color = getShapeAndColor(
-                        mainBoard, boxx, boxy)
+        #     if boxx is not None and boxy is not None:
+        #         # The mouse is currently over a box.
+        #         if not revealedBoxes[boxx][boxy]:
+        #             drawHighlightBox(boxx, boxy)
+        #         if not revealedBoxes[boxx][boxy] and mouseClicked:
+        #             revealBoxesAnimation(mainBoard, [(boxx, boxy)])
+        #             revealedBoxes[boxx][boxy] = True  # set the box as "revealed"
+        #             if firstSelection is None:  # the current box was the first box clicked
+        #                 firstSelection = (boxx, boxy)
+        #             else:  # the current box was the second box clicked
+        #                 # Check if there is a match between the two icons.
+        #                 icon1shape, icon1color = getShapeAndColor(
+        #                     mainBoard, firstSelection[0], firstSelection[1])
+        #                 icon2shape, icon2color = getShapeAndColor(
+        #                     mainBoard, boxx, boxy)
 
-                    if icon1shape != icon2shape or icon1color != icon2color:
-                        # Icons don't match. Re-cover up both selections.
-                        pygame.time.wait(1000)  # 1000 milliseconds = 1 sec
-                        coverBoxesAnimation(
-                            mainBoard, [(firstSelection[0], firstSelection[1]), (boxx, boxy)])
-                        revealedBoxes[firstSelection[0]
-                                      ][firstSelection[1]] = False
-                        revealedBoxes[boxx][boxy] = False
-                    elif hasWon(revealedBoxes):  # check if all pairs found
-                        gameWonAnimation(mainBoard)
-                        pygame.time.wait(2000)
+        #                 if icon1shape != icon2shape or icon1color != icon2color:
+        #                     # Icons don't match. Re-cover up both selections.
+        #                     pygame.time.wait(1000)  # 1000 milliseconds = 1 sec
+        #                     coverBoxesAnimation(
+        #                         mainBoard, [(firstSelection[0], firstSelection[1]), (boxx, boxy)])
+        #                     revealedBoxes[firstSelection[0]
+        #                                   ][firstSelection[1]] = False
+        #                     revealedBoxes[boxx][boxy] = False
+        #                 elif hasWon(revealedBoxes):  # check if all pairs found
+        #                     gameWonAnimation(mainBoard)
+        #                     pygame.time.wait(2000)
 
-                        # Reset the board
-                        mainBoard = getRandomizedBoard()
-                        revealedBoxes = generateRevealedBoxesData(False)
+        #                     # Reset the board
+        #                     mainBoard = getRandomizedBoard()
+        #                     revealedBoxes = generateRevealedBoxesData(False)
 
-                        # Show the fully unrevealed board for a second.
-                        drawBoard(mainBoard, revealedBoxes)
-                        pygame.display.update()
-                        pygame.time.wait(1000)
+        #                     # Show the fully unrevealed board for a second.
+        # drawBoard(mainBoard, revealedBoxes)
+        #                     pygame.display.update()
+        #                     pygame.time.wait(1000)
 
-                        # Replay the start game animation.
-                        startGameAnimation(mainBoard)
-                    firstSelection = None  # reset firstSelection variable
+        #                     # Replay the start game animation.
+        startGameAnimation(mainBoard)
+        #                 firstSelection = None  # reset firstSelection variable
 
         # Redraw the screen and wait a clock tick.
         pygame.display.update()
@@ -170,7 +174,7 @@ def splitIntoGroupsOf(groupSize, theList):
     # most groupSize number of items.
     result = []
     for i in range(0, len(theList), groupSize):
-        result.append(theList[i:i + groupSize])
+        result.append(theList[i : i + groupSize])
     return result
 
 
@@ -199,25 +203,36 @@ def drawIcon(shape, color, boxx, boxy):
     left, top = leftTopCoordsOfBox(boxx, boxy)
     # Draw the shapes
     if shape == DONUT:
-        pygame.draw.circle(DISPLAYSURF, color,
-                           (left + half, top + half), half - 5)
-        pygame.draw.circle(DISPLAYSURF, BGCOLOR,
-                           (left + half, top + half), quarter - 5)
+        pygame.draw.circle(DISPLAYSURF, color, (left + half, top + half), half - 5)
+        pygame.draw.circle(DISPLAYSURF, BGCOLOR, (left + half, top + half), quarter - 5)
     elif shape == SQUARE:
-        pygame.draw.rect(DISPLAYSURF, color, (left + quarter,
-                         top + quarter, BOXSIZE - half, BOXSIZE - half))
+        pygame.draw.rect(
+            DISPLAYSURF,
+            color,
+            (left + quarter, top + quarter, BOXSIZE - half, BOXSIZE - half),
+        )
     elif shape == DIAMOND:
-        pygame.draw.polygon(DISPLAYSURF, color, ((left + half, top), (left + BOXSIZE - 1,
-                            top + half), (left + half, top + BOXSIZE - 1), (left, top + half)))
+        pygame.draw.polygon(
+            DISPLAYSURF,
+            color,
+            (
+                (left + half, top),
+                (left + BOXSIZE - 1, top + half),
+                (left + half, top + BOXSIZE - 1),
+                (left, top + half),
+            ),
+        )
     elif shape == LINES:
         for i in range(0, BOXSIZE, 4):
-            pygame.draw.line(DISPLAYSURF, color,
-                             (left, top + i), (left + i, top))
-            pygame.draw.line(DISPLAYSURF, color, (left + i,
-                             top + BOXSIZE - 1), (left + BOXSIZE - 1, top + i))
+            pygame.draw.line(DISPLAYSURF, color, (left, top + i), (left + i, top))
+            pygame.draw.line(
+                DISPLAYSURF,
+                color,
+                (left + i, top + BOXSIZE - 1),
+                (left + BOXSIZE - 1, top + i),
+            )
     elif shape == OVAL:
-        pygame.draw.ellipse(DISPLAYSURF, color,
-                            (left, top + quarter, BOXSIZE, half))
+        pygame.draw.ellipse(DISPLAYSURF, color, (left, top + quarter, BOXSIZE, half))
 
 
 def getShapeAndColor(board, boxx, boxy):
@@ -235,8 +250,7 @@ def drawBoxCovers(board, boxes, coverage):
         shape, color = getShapeAndColor(board, box[0], box[1])
         drawIcon(shape, color, box[0], box[1])
         if coverage > 0:  # only draw the cover if there is an coverage
-            pygame.draw.rect(DISPLAYSURF, BOXCOLOR,
-                             (left, top, coverage, BOXSIZE))
+            pygame.draw.rect(DISPLAYSURF, BOXCOLOR, (left, top, coverage, BOXSIZE))
     pygame.display.update()
     FPSCLOCK.tick(FPS)
 
@@ -260,8 +274,7 @@ def drawBoard(board, revealed):
             left, top = leftTopCoordsOfBox(boxx, boxy)
             if not revealed[boxx][boxy]:
                 # Draw a covered box.
-                pygame.draw.rect(DISPLAYSURF, BOXCOLOR,
-                                 (left, top, BOXSIZE, BOXSIZE))
+                pygame.draw.rect(DISPLAYSURF, BOXCOLOR, (left, top, BOXSIZE, BOXSIZE))
             else:
                 # Draw the (revealed) icon.
                 shape, color = getShapeAndColor(board, boxx, boxy)
@@ -270,8 +283,9 @@ def drawBoard(board, revealed):
 
 def drawHighlightBox(boxx, boxy):
     left, top = leftTopCoordsOfBox(boxx, boxy)
-    pygame.draw.rect(DISPLAYSURF, HIGHLIGHTCOLOR, (left - 5,
-                     top - 5, BOXSIZE + 10, BOXSIZE + 10), 4)
+    pygame.draw.rect(
+        DISPLAYSURF, HIGHLIGHTCOLOR, (left - 5, top - 5, BOXSIZE + 10, BOXSIZE + 10), 4
+    )
 
 
 def startGameAnimation(board):
@@ -312,5 +326,5 @@ def hasWon(revealedBoxes):
     return True
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
