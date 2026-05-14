@@ -31,8 +31,8 @@ rect_width = 70
 rect_height = 70
 
 # Speed and direction of rectangle
-rect_change_x =2
-rect_change_y =2
+rect_change_x =1
+rect_change_y =1
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
 sound_folder = os.path.join(script_dir, 'Sounds')
@@ -58,9 +58,7 @@ while not done:
         if event.type == pygame.QUIT:
             done = True
 
-    if abs(rect_change_x) > 20:
-        done = True
-    if abs(rect_change_y) > 20:
+    if abs(rect_change_x) > 10:
         done = True
 
     # --- Logic
