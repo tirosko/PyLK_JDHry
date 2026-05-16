@@ -23,7 +23,7 @@ Memory Puzzle je hra postavená na knižnici Pygame, kde hráč musí nájsť p�
 
 - **Spolu 35 unikátnych kombinácií** (viac ako potrebných 35 párov)
 
-## 3. Hlavná funkcia - Game Loop (`main()`)
+## 3. Hlavná funkcia - Game Loop (main())
 
 Jadro hry, ktoré sa neustále opakuje:
 
@@ -47,13 +47,13 @@ Jadro hry, ktoré sa neustále opakuje:
 
 ## 4. Generovanie hernej dosky
 
-### `generateRevealedBoxesData(val)`
+### generateRevealedBoxesData(val)
 
 - Vytvorí 2D pole `revealedBoxes[10][7]`
 - Všetky políčka inicializované na rovnakú hodnotu (True = otvorené, False = zatvorené)
 - Sleduje stav jednotlivých políčok počas hry
 
-### `getRandomizedBoard()`
+### getRandomizedBoard()
 
 - Vytvorí všetky možné kombinácie farieb a tvarov
 - Z dostupných kombinácií vyber 35 unikátnych párov
@@ -65,12 +65,14 @@ Jadro hry, ktoré sa neustále opakuje:
 
 ## 5. Konverzia súradníc
 
-### `leftTopCoordsOfBox(boxx, boxy)`
+### leftTopCoordsOfBox(boxx, boxy)
 
 - Premení súradnice dosky (0-9, 0-6) na **pixelové súradnice** na obrazovke
 - Zohľadňuje XMARGIN, YMARGIN, BOXSIZE a GAPSIZE
+- 
+- Vyskúšaj na malom programe
 
-### `getBoxAtPixel(x, y)`
+### getBoxAtPixel(x, y)
 
 - **Opačný proces**: Zistí, na ktoré políčko dosky hráč klikol
 - Prejde všetky políčka (10×7) a skontroluje, či sa myš nachádza v ich oblasti
