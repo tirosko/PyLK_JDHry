@@ -30,7 +30,7 @@ Jadro hry, ktoré sa neustále opakuje:
 ### Fázy
 
 1. **Inicializácia Pygame** - vytvorenie okna a hernej dosky
-2. **Herný cyklus** (`while True`):
+2. **Herný cyklus** (while True):
    - Vyčistenie a prekreslenie obrazovky
    - **Spracovanie udalostí**:
      - Kľúč ESC = zatvorenie hry
@@ -49,7 +49,7 @@ Jadro hry, ktoré sa neustále opakuje:
 
 ### generateRevealedBoxesData(val)
 
-- Vytvorí 2D pole `revealedBoxes[10][7]`
+- Vytvorí 2D pole revealedBoxes[10][7]
 - Všetky políčka inicializované na rovnakú hodnotu (True = otvorené, False = zatvorené)
 - Sleduje stav jednotlivých políčok počas hry
 
@@ -82,7 +82,7 @@ Jadro hry, ktoré sa neustále opakuje:
 
 ## 6. Vykresľovanie grafiky
 
-### `drawIcon(shape, color, boxx, boxy)`
+### drawIcon(shape, color, boxx, boxy)
 
 Nakreslí ikonu podľa tvaru a farby:
 
@@ -92,20 +92,20 @@ Nakreslí ikonu podľa tvaru a farby:
 - **LINES**: Šikmé čiary
 - **OVAL**: Oválny tvar
 
-### `drawBoxCovers(board, boxes, coverage)`
+### *drawBoxCovers(board, boxes, coverage)*
 
 - Nakreslí políčka s pokrytím (pre animácie)
-- `coverage`: Počet pixelov pokrytia (0 = otvorené, BOXSIZE = zatvorené)
+- coverage: Počet pixelov pokrytia (0 = otvorené, BOXSIZE = zatvorené)
 - Aktualizuje obrazovku a spustí FPS hodiny
 
-### `drawBoard(board, revealed)`
+### *drawBoard(board, revealed)*
 
 - Nakreslí **celú dosku**
 - Pre každé políčko:
-  - Zatvorené (`revealed[x][y] = False`) → Biele políčko
-  - Otvorené (`revealed[x][y] = True`) → Nakreslí ikonu
+  - Zatvorené (revealed[x][y] = False) → Biele políčko
+  - Otvorené (revealed[x][y] = True) → Nakreslí ikonu
 
-### `drawHighlightBox(boxx, boxy)`
+### *drawHighlightBox(boxx, boxy)*
 
 - Nakreslí **modrý okvás** okolo políčka pod myšou
 - Vizuálna spätná väzba pre hráča
@@ -114,24 +114,24 @@ Nakreslí ikonu podľa tvaru a farby:
 
 ## 7. Animácie
 
-### `revealBoxesAnimation(board, boxesToReveal)`
+### revealBoxesAnimation(board, boxesToReveal)
 
 - Animácia **otváraní políčka**
 - Postupne zmenšuje pokrytie z BOXSIZE na 0 (v krokoch po REVEALSPEED)
 - Vytvorí efekt "skĺzavajúcej" vrstvy
 
-### `coverBoxesAnimation(board, boxesToCover)`
+### coverBoxesAnimation(board, boxesToCover)
 
 - Opačný efekt - animácia **zatvárania**
 - Postupne zväčšuje pokrytie z 0 na BOXSIZE
 
-### `startGameAnimation(board)`
+### startGameAnimation(board)
 
 - **Úvodná animácia** - postupne otvorí a zatvára všetky políčka
 - Rozdelí 70 políčok na skupiny po 8 a animuje ich po poriadku
 - Vytvorí vizuálny efekt "prehliadky" dosky
 
-### `gameWonAnimation(board)`
+### gameWonAnimation(board)
 
 - **Blikajúca animácia** pri víťazstve
 - Pozadie bliká medzi LIGHTBGCOLOR a BGCOLOR 13-krát
@@ -143,88 +143,62 @@ Nakreslí ikonu podľa tvaru a farby:
 
 |Funkcia|Účel|
 |---------|------|
-|`splitIntoGroupsOf(groupSize, list)`|Rozdelí zoznam na menšie skupiny (používa sa v `startGameAnimation`)|
-|`getShapeAndColor(board, x, y)`|Vráti (tvar, farba) ikony na pozícii|
-|`hasWon(revealedBoxes)`|Skontroluje, či sú **všetky** políčka otvorené (príspevá na víťazstvo)|
+|splitIntoGroupsOf(groupSize, list)|Rozdelí zoznam na menšie skupiny (používa sa v startGameAnimation)|
+|getShapeAndColor(board, x, y)|Vráti (tvar, farba) ikony na pozícii|
+|hasWon(revealedBoxes)|Skontroluje, či sú **všetky** políčka otvorené (príspevá na víťazstvo)|
 
 ---
 
 ## 9. Tok hry - Detailný popis
 
-┌─────────────────────────────────────┐
-│   SPUSTENIE PROGRAMU                │
-└──────────────┬──────────────────────┘
-               │
-               ▼
-┌─────────────────────────────────────┐
-│ 1. INICIALIZÁCIA                    │
-│ - Pygame inicializácia              │
-│ - Generovanie náhodnej dosky        │
-│ - Všetky políčka zatvorené          │
-└──────────────┬──────────────────────┘
-               │
-               ▼
-┌─────────────────────────────────────┐
-│ 2. ÚVODNÁ ANIMÁCIA                  │
-│ - Postupné otvorenie/zatvorenie     │
-│ - Vizuálny efekt "prehliadky"       │
-└──────────────┬──────────────────────┘
-               │
-               ▼
-┌─────────────────────────────────────┐
-│ 3. HLAVNÝ HERNÝ CYKLUS              │
-│                                     │
-│ A) Hráč pohne myšou nad políčko     │
-│    → Modrý okvás (highlight)        │
-│                                     │
-│ B) Hráč klikne na zatvorené políčko │
-│    → REVEAL ANIMÁCIA                │
-│    → 1. výber uložený               │
-│                                     │
-│ C) Hráč klikne na ďalšie políčko    │
-│    → REVEAL ANIMÁCIA                │
-│    → POROVNANIE                     │
-│                                     │
-│    ├─ ZHODA: Ikony sa rovnajú       │
-│    │  → Políčka zostanú otvorené    │
-│    │  → Pokračuj s krokom B         │
-│    │                                │
-│    └─ NEZHODA: Ikony sa nerovnajú   │
-│       → Čakanie 1000ms              │
-│       → COVER ANIMÁCIA              │
-│       → Pokračuj s krokom B         │
-└──────────────┬──────────────────────┘
-               │
-               ▼
-┌─────────────────────────────────────┐
-│ 4. SKONTROLUJ VÍŤAZSTVO             │
-│                                     │
-│ Sú všetky politička otvorené?       │
-│                                     │
-│ ├─ NIE: Pokračuj s krokom 3         │
-│ │                                   │
-│ └─ ÁNO: VYHRAL!                     │
-└──────────────┬──────────────────────┘
-               │
-               ▼
-┌─────────────────────────────────────┐
-│ 5. ANIMÁCIA VÍŤAZSTVA               │
-│ - Blikajúce pozadie (13x)           │
-│ - Čakanie 2 sekundy                 │
-└──────────────┬──────────────────────┘
-               │
-               ▼
-┌─────────────────────────────────────┐
+SPUSTENIE PROGRAMU                
+          
+1. INICIALIZÁCIA         
+- Pygame inicializácia
+- Generovanie náhodnej dosky
+- Všetky políčka zatvorené
+
+2. ÚVODNÁ ANIMÁCIA
+- Postupné otvorenie/zatvorenie
+- Vizuálny efekt "prehliadky"
+
+
+3. HLAVNÝ HERNÝ CYKLUS                                 
+A) Hráč pohne myšou nad políčko    
+→ Modrý okvás (highlight)       
+                                  
+B) Hráč klikne na zatvorené políčko
+- REVEAL ANIMÁCIA               
+- - výber uložený              
+                                  
+C. Hráč klikne na ďalšie políčko
+- REVEAL ANIMÁCIA               
+- POROVNANIE                    
+                                  
+   ├─ ZHODA: Ikony sa rovnajú      
+   │  → Políčka zostanú otvorené   
+   │  → Pokračuj s krokom B        
+   │                               
+   └─ NEZHODA: Ikony sa nerovnajú  
+      → Čakanie 1000ms             
+      → COVER ANIMÁCIA             
+      → Pokračuj s krokom B
+
+4. SKONTROLUJ VÍŤAZSTVO                               
+Sú všetky politička otvorené?           
+- NIE: Pokračuj s krokom 3                        
+- ÁNO: VYHRAL!              
+
+5. ANIMÁCIA VÍŤAZSTVA
+- Blikajúce pozadie (13x)
+- Čakanie 2 sekundy  
+
 │ 6. RESET HRY                        │
 │ - Nová náhodná doska                │
 │ - Všetky políčka zatvorené          │
 │ - Návrat na úvodnú animáciu (krok 2)│
-└──────────────┬──────────────────────┘
-               │
-               ▼
-         (CYKLUS SA OPAKUJE)
 
-```text
+(CYKLUS SA OPAKUJE)
 
 ---
 
