@@ -77,6 +77,9 @@ Jadro hry, ktoré sa neustále opakuje:
 - **Opačný proces**: Zistí, na ktoré políčko dosky hráč klikol
 - Prejde všetky políčka (10×7) a skontroluje, či sa myš nachádza v ich oblasti
 - Vráti (boxx, boxy) alebo (None, None)
+---
+Moje poznámky:  
+*V podtate sa snímajú súradnice myši o pracovnej ploche*
 
 ---
 
@@ -173,16 +176,16 @@ B) Hráč klikne na zatvorené políčko
                                   
 C. Hráč klikne na ďalšie políčko
 - REVEAL ANIMÁCIA               
-- POROVNANIE                    
-                                  
-   ├─ ZHODA: Ikony sa rovnajú      
-   │  → Políčka zostanú otvorené   
-   │  → Pokračuj s krokom B        
-   │                               
-   └─ NEZHODA: Ikony sa nerovnajú  
-      → Čakanie 1000ms             
-      → COVER ANIMÁCIA             
-      → Pokračuj s krokom B
+- POROVNANIE
+                                         
+   ZHODA: Ikony sa rovnajú      
+   → Políčka zostanú otvorené   
+   → Pokračuj s krokom B        
+                                
+   NEZHODA: Ikony sa nerovnajú  
+   → Čakanie 1000ms             
+   → COVER ANIMÁCIA             
+   → Pokračuj s krokom B
 
 4. SKONTROLUJ VÍŤAZSTVO                               
 Sú všetky politička otvorené?           
