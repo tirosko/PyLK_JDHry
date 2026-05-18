@@ -1,5 +1,6 @@
 - Šablóna pre debug stlačenej klávesy
-- debug_example.py
+- súbor debug_example.py
+
 ### getBoxAtPixel(x, y)  
 
 Moje poznámky - program memorypuzzle1.py:  
