@@ -8,7 +8,7 @@
  
  Explanation video: http://youtu.be/-GmKoaX2iMs
 """
-
+import os
 import pygame
 
 # Define some colors
@@ -27,9 +27,17 @@ y_size = 500
 rect_x = 50
 rect_y = 50
 
+rect_width = 70
+rect_height = 70
+
 # Speed and direction of rectangle
 rect_change_x =1
 rect_change_y =1
+
+script_dir = os.path.dirname(os.path.abspath(__file__))
+sound_folder = os.path.join(script_dir, 'Sounds')
+sound_path = os.path.join(sound_folder, 'match1.wav')
+rect_sound = pygame.mixer.Sound(sound_path)
 
 size = [x_size, y_size]
 screen = pygame.display.set_mode(size)
@@ -60,8 +68,8 @@ while not done:
     naraz = False
 
     # Bounce the ball if needed
-    okraj_x = x_size - 50
-    okraj_y = y_size - 50
+    okraj_x = x_size - rect_width
+    okraj_y = y_size - rect_height
     if rect_y > okraj_y or rect_y < 0:
         naraz = True
         rect_change_y = rect_change_y * -1
@@ -71,6 +79,7 @@ while not done:
 
     if naraz:
         # print("Naraz!")
+        rect_sound.play()
         if rect_change_x > 0:
             # print("Směr: doprava")
             rect_change_x = rect_change_x + 1
@@ -91,8 +100,8 @@ while not done:
     screen.fill(BLACK)
 
     # Draw the rectangle
-    pygame.draw.rect(screen, WHITE, [rect_x, rect_y, 50, 50])
-    # pygame.draw.rect(screen, RED, [rect_x + 10, rect_y + 10, 30, 30])
+    pygame.draw.rect(screen, WHITE, [rect_x, rect_y, rect_width, rect_height])
+    pygame.draw.rect(screen, RED, [rect_x + 10, rect_y + 10, rect_width - 20, rect_height - 20])
 
     # --- Wrap-up
     # Limit to 60 frames per second

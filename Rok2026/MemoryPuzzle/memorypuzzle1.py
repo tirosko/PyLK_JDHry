@@ -130,7 +130,7 @@ def main():
         #                     pygame.time.wait(1000)
 
         #                     # Replay the start game animation.
-        startGameAnimation(mainBoard)
+        # startGameAnimation(mainBoard)
         #                 firstSelection = None  # reset firstSelection variable
 
         # Redraw the screen and wait a clock tick.
@@ -174,7 +174,7 @@ def splitIntoGroupsOf(groupSize, theList):
     # most groupSize number of items.
     result = []
     for i in range(0, len(theList), groupSize):
-        result.append(theList[i : i + groupSize])
+        result.append(theList[i: i + groupSize])
     return result
 
 
@@ -186,6 +186,8 @@ def leftTopCoordsOfBox(boxx, boxy):
 
 
 def getBoxAtPixel(x, y):
+    # Výpis
+    print(f'x, y: {x}, {y}')
     for boxx in range(BOARDWIDTH):
         for boxy in range(BOARDHEIGHT):
             left, top = leftTopCoordsOfBox(boxx, boxy)
@@ -203,8 +205,10 @@ def drawIcon(shape, color, boxx, boxy):
     left, top = leftTopCoordsOfBox(boxx, boxy)
     # Draw the shapes
     if shape == DONUT:
-        pygame.draw.circle(DISPLAYSURF, color, (left + half, top + half), half - 5)
-        pygame.draw.circle(DISPLAYSURF, BGCOLOR, (left + half, top + half), quarter - 5)
+        pygame.draw.circle(DISPLAYSURF, color,
+                           (left + half, top + half), half - 5)
+        pygame.draw.circle(DISPLAYSURF, BGCOLOR,
+                           (left + half, top + half), quarter - 5)
     elif shape == SQUARE:
         pygame.draw.rect(
             DISPLAYSURF,
@@ -224,7 +228,8 @@ def drawIcon(shape, color, boxx, boxy):
         )
     elif shape == LINES:
         for i in range(0, BOXSIZE, 4):
-            pygame.draw.line(DISPLAYSURF, color, (left, top + i), (left + i, top))
+            pygame.draw.line(DISPLAYSURF, color,
+                             (left, top + i), (left + i, top))
             pygame.draw.line(
                 DISPLAYSURF,
                 color,
@@ -232,7 +237,8 @@ def drawIcon(shape, color, boxx, boxy):
                 (left + BOXSIZE - 1, top + i),
             )
     elif shape == OVAL:
-        pygame.draw.ellipse(DISPLAYSURF, color, (left, top + quarter, BOXSIZE, half))
+        pygame.draw.ellipse(DISPLAYSURF, color,
+                            (left, top + quarter, BOXSIZE, half))
 
 
 def getShapeAndColor(board, boxx, boxy):
@@ -250,7 +256,8 @@ def drawBoxCovers(board, boxes, coverage):
         shape, color = getShapeAndColor(board, box[0], box[1])
         drawIcon(shape, color, box[0], box[1])
         if coverage > 0:  # only draw the cover if there is an coverage
-            pygame.draw.rect(DISPLAYSURF, BOXCOLOR, (left, top, coverage, BOXSIZE))
+            pygame.draw.rect(DISPLAYSURF, BOXCOLOR,
+                             (left, top, coverage, BOXSIZE))
     pygame.display.update()
     FPSCLOCK.tick(FPS)
 
@@ -274,18 +281,19 @@ def drawBoard(board, revealed):
             left, top = leftTopCoordsOfBox(boxx, boxy)
             if not revealed[boxx][boxy]:
                 # Draw a covered box.
-                pygame.draw.rect(DISPLAYSURF, BOXCOLOR, (left, top, BOXSIZE, BOXSIZE))
+                pygame.draw.rect(DISPLAYSURF, BOXCOLOR,
+                                 (left, top, BOXSIZE, BOXSIZE))
             else:
                 # Draw the (revealed) icon.
                 shape, color = getShapeAndColor(board, boxx, boxy)
                 drawIcon(shape, color, boxx, boxy)
 
 
-def drawHighlightBox(boxx, boxy):
-    left, top = leftTopCoordsOfBox(boxx, boxy)
-    pygame.draw.rect(
-        DISPLAYSURF, HIGHLIGHTCOLOR, (left - 5, top - 5, BOXSIZE + 10, BOXSIZE + 10), 4
-    )
+# def drawHighlightBox(boxx, boxy):
+#     left, top = leftTopCoordsOfBox(boxx, boxy)
+#     pygame.draw.rect(
+#         DISPLAYSURF, HIGHLIGHTCOLOR, (left - 5, top - 5, BOXSIZE + 10, BOXSIZE + 10), 4
+#     )
 
 
 def startGameAnimation(board):
@@ -304,26 +312,26 @@ def startGameAnimation(board):
         coverBoxesAnimation(board, boxGroup)
 
 
-def gameWonAnimation(board):
-    # flash the background color when the player has won
-    coveredBoxes = generateRevealedBoxesData(True)
-    color1 = LIGHTBGCOLOR
-    color2 = BGCOLOR
+# def gameWonAnimation(board):
+#     # flash the background color when the player has won
+#     coveredBoxes = generateRevealedBoxesData(True)
+#     color1 = LIGHTBGCOLOR
+#     color2 = BGCOLOR
 
-    for i in range(13):
-        color1, color2 = color2, color1  # swap colors
-        DISPLAYSURF.fill(color1)
-        drawBoard(board, coveredBoxes)
-        pygame.display.update()
-        pygame.time.wait(300)
+#     for i in range(13):
+#         color1, color2 = color2, color1  # swap colors
+#         DISPLAYSURF.fill(color1)
+#         drawBoard(board, coveredBoxes)
+#         pygame.display.update()
+#         pygame.time.wait(300)
 
 
-def hasWon(revealedBoxes):
-    # Returns True if all the boxes have been revealed, otherwise False
-    for i in revealedBoxes:
-        if False in i:
-            return False  # return False if any boxes are covered.
-    return True
+# def hasWon(revealedBoxes):
+#     # Returns True if all the boxes have been revealed, otherwise False
+#     for i in revealedBoxes:
+#         if False in i:
+#             return False  # return False if any boxes are covered.
+#     return True
 
 
 if __name__ == "__main__":
