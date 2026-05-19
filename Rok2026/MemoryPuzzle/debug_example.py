@@ -52,7 +52,6 @@ def draw_hitboxes():
 # Hlavná herná slučka
 # -----------------------------
 while running:
-    clock.tick(60)  # limit FPS
 
     # -------------------------
     # Event loop
@@ -92,4 +91,5 @@ while running:
 
     pygame.display.flip()
 
+    clock.tick(20)  # limit FPS
 pygame.quit()
