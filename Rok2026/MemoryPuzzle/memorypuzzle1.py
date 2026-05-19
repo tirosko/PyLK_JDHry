@@ -76,7 +76,7 @@ def main():
     # startGameAnimation(mainBoard)
 
     while True:  # main game loop
-        mouseClicked = False
+        # mouseClicked = False
 
         DISPLAYSURF.fill(BGCOLOR)  # drawing the window
         drawBoard(mainBoard, revealedBoxes)
@@ -89,7 +89,7 @@ def main():
                 mousex, mousey = event.pos
             elif event.type == MOUSEBUTTONUP:
                 mousex, mousey = event.pos
-                mouseClicked = True
+                # mouseClicked = True
 
         boxx, boxy = getBoxAtPixel(mousex, mousey)
         #     if boxx is not None and boxy is not None:
