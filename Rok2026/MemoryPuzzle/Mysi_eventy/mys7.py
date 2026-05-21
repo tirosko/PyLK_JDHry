@@ -19,6 +19,8 @@
 # Automaticky sa prispôsobí veľkosti GRID.
 
 
+ # DU VYRIES TO ABY SA ZACHOVALI POVODNE FARBY 
+
 import pygame
 pygame.init()
 

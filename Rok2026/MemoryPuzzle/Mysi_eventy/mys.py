@@ -15,6 +15,9 @@ while running:
 # 3 = pravé
 # 4 = koliesko hore
 # 5 = koliesko dole
+# 6 = bocne dolne tlačidlo
+# 7 = bocne horne tlačidlo
+
         if event.type == pygame.MOUSEBUTTONDOWN:
             print("Klik:", event.pos, "tlačidlo:", event.button)
 
