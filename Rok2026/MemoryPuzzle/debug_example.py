@@ -91,5 +91,5 @@ while running:
 
     pygame.display.flip()
 
-    clock.tick(20)  # limit FPS
+    clock.tick(60)  # limit FPS
 pygame.quit()

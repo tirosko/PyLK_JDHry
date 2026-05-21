@@ -23,10 +23,10 @@ while running:
         # Detekcia kliknutia
         if event.type == pygame.MOUSEBUTTONDOWN:
             if rect.collidepoint(event.pos):
-                print("Klikol si na štvorec!")
+                print("Klikol si na štvorec")
                 rect_color = (255, 80, 80)  # zmena farby po kliknutí
             else:
-                print("Klikol si mimo štvorca.")
+                print("Klikol si mimo štvorca")
                 rect_color = (0, 120, 255)  # reset farby    
 
     # Kreslenie
